@@ -16,10 +16,28 @@ export const createMamifero = async(data:any) => {
 export const getAll = async() => {
     const mamifero = await prisma.mamiferos.findMany({
         select: {
+            id: true,
             nome: true,
             descricao:true,
             peso: true,
             extincao: true
+        }
+    })
+    return mamifero;
+}
+
+export const getById = async(id:number) => {
+    const mamifero = await prisma.mamiferos.findUnique({
+        where: {
+            id
+        },
+        select:{
+            id: true,
+            nome: true,
+            descricao:true,
+            extincao: true,
+            peso: true
+            
         }
     })
     return mamifero;
