@@ -11,4 +11,9 @@ export const createMamifero = async(data:any) => {
         }
     });
     return data;
+};
+
+export const getAll = async() => {
+    const mamifero = await prisma.mamiferos.findMany({})
+    return mamifero;
 }
