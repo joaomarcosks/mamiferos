@@ -42,3 +42,21 @@ export const getById = async(id:number) => {
     })
     return mamifero;
 }
+
+export const update = async(id:number, data:any) => {
+    const mamifero = await prisma.mamiferos.update({
+        where: {
+            id
+        } ,
+        data,
+        select: {
+            id: true,
+            nome: true,
+            descricao:true,
+            extincao: true,
+            peso: true
+            
+        }
+    })
+    return  mamifero;
+}

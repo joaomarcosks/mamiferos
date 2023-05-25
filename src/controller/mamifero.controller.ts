@@ -1,4 +1,4 @@
-import { createMamifero, getAll, getById} from "../repository/mamifero.repository";
+import { createMamifero, getAll, getById, update} from "../repository/mamifero.repository";
 import { Request, Response } from "express";
 
 
@@ -30,5 +30,16 @@ export const getId = async(req:Request, res:Response ) => {
     } catch (error) {
         res.status(400).send(error)
         console.log(error);
+    }
+}
+
+export const updateId = async(req: Request, res:Response) => {
+
+    try {
+         const mamifero = await update(Number(req.params.id), req.body);
+         res.status(200), res.send(mamifero);
+    } catch (e) {
+        res.status(400), res.send(e);
+        console.log(e);
     }
 }
