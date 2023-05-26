@@ -3,6 +3,7 @@
 
 generator client {
   provider = "prisma-client-js"
+   previewFeatures = ["fullTextSearch","fullTextIndex"]
 }
 
 datasource db {
@@ -12,7 +13,7 @@ datasource db {
 
 model Mamiferos {
   id Int @id @default(autoincrement())
-  nome String 
+  nome String @unique 
   descricao String
   extincao Boolean @default(true)
   peso Int

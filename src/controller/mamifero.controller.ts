@@ -1,4 +1,4 @@
-import { createMamifero, getAll, getById, update, delect} from "../repository/mamifero.repository";
+import { createMamifero, getAll, getByString, update, delect} from "../repository/mamifero.repository";
 import { Request, Response } from "express";
 
 
@@ -10,7 +10,7 @@ export const create = async(req: Request, res: Response) => {
         res.status(400).send(error)
         console.log(error);
     }
-}
+};
 
 export const get = async(req: Request, res: Response) =>{
     try {
@@ -21,17 +21,18 @@ export const get = async(req: Request, res: Response) =>{
         console.log(e);
     }
 
-}
+};
 
-export const getId = async(req:Request, res:Response ) => {
+export const getString = async(req: Request, res:Response) => {
     try {
-        const mamifero = await getById(Number(req.params.id));
+        const mamifero = await getByString(String(req.body.nome))
         res.status(200), res.send(mamifero)
-    } catch (error) {
-        res.status(400).send(error)
-        console.log(error);
+    } catch (e) {
+        res.status(400), res.send(e);
+        console.log(e);
     }
-}
+};
+
 
 export const updateId = async(req: Request, res:Response) => {
 
@@ -42,7 +43,7 @@ export const updateId = async(req: Request, res:Response) => {
         res.status(400), res.send(e);
         console.log(e);
     }
-}
+};
 
 export const delected = async (req: Request, res:Response) => {
     try {

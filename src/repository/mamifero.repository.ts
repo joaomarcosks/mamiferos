@@ -9,7 +9,8 @@ export const createMamifero = async(data:any) => {
             peso: true,
             extincao: true
         }
-    });
+    })
+
     return data;
 };
 
@@ -23,25 +24,30 @@ export const getAll = async() => {
             extincao: true
         }
     })
-    return mamifero;
-}
 
-export const getById = async(id:number) => {
-    const mamifero = await prisma.mamiferos.findUnique({
-        where: {
-            id
-        },
-        select:{
-            id: true,
-            nome: true,
-            descricao:true,
-            extincao: true,
-            peso: true
-            
-        }
-    })
     return mamifero;
-}
+};
+
+export const getByString = async (data: string) => {
+    const mamifero = await prisma.mamiferos.findMany({
+      where: {
+        OR: [
+          { nome: { contains: data } }, 
+          { descricao: { contains: data } }, 
+        ],
+      },
+      select: {
+        id: true,
+        nome: true,
+        descricao: true,
+        peso: true,
+        extincao: true
+       
+      },
+    });
+
+    return mamifero;
+  };
 
 export const update = async(id:number, data:any) => {
     const mamifero = await prisma.mamiferos.update({
@@ -58,8 +64,9 @@ export const update = async(id:number, data:any) => {
             
         }
     })
+
     return  mamifero;
-}
+};
 
 export const delect = async(id:any) => {
     await prisma.mamiferos.delete({
@@ -67,5 +74,6 @@ export const delect = async(id:any) => {
             id
         }
     })
+
     return
-}
+};
