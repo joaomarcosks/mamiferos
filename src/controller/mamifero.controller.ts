@@ -1,4 +1,4 @@
-import { createMamifero, getAll, getById, update} from "../repository/mamifero.repository";
+import { createMamifero, getAll, getById, update, delect} from "../repository/mamifero.repository";
 import { Request, Response } from "express";
 
 
@@ -43,3 +43,13 @@ export const updateId = async(req: Request, res:Response) => {
         console.log(e);
     }
 }
+
+export const delected = async (req: Request, res:Response) => {
+    try {
+        await delect(Number(req.params.id))
+        res.status(200), res.send("deletado")
+    } catch (error) {
+        res.status(400), res.send(error);
+        console.log(error);
+    }
+};

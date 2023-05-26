@@ -60,3 +60,12 @@ export const update = async(id:number, data:any) => {
     })
     return  mamifero;
 }
+
+export const delect = async(id:any) => {
+    await prisma.mamiferos.delete({
+        where: {
+            id
+        }
+    })
+    return
+}
